@@ -28,9 +28,17 @@
             profiles = [ "${linglong}/etc/profile.d" ];
             systemPackages = [ linglong ];
           };
+
           services.dbus.packages = [ linglong ];
           systemd.packages = [ linglong ];
-          users.users.deepin-linglong.isSystemUser = true;
+
+          users = {
+            groups.deepin-linglong = {};
+            users.deepin-linglong = {
+              group = "deepin-linglong";
+              isSystemUser = true;
+            };
+          };
         };
       };
   };
