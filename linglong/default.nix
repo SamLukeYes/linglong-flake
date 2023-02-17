@@ -17,6 +17,7 @@
 , procps
 , qttools
 , qtwebsockets
+, runtimeShell
 , util-linux
 , wrapGAppsHook
 , wrapQtAppsHook
@@ -89,6 +90,7 @@ stdenv.mkDerivation rec {
 
   qtWrapperArgs = [
     "--prefix PATH : ${lib.makeBinPath [ ostree procps util-linux ]}"
+    "--set SHELL ${runtimeShell}"
   ];
 
   meta = with lib; {
