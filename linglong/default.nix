@@ -10,9 +10,11 @@
 , libselinux
 , libsepol
 , libyamlcpp
+, linglong-box
 , ostree
 , pcre
 , pkgconfig
+, procps
 , qttools
 , qtwebsockets
 , util-linux
@@ -51,7 +53,6 @@ stdenv.mkDerivation rec {
     ostree
     pcre
     qtwebsockets
-    util-linux
   ];
 
   postPatch = ''
@@ -61,6 +62,7 @@ stdenv.mkDerivation rec {
         --replace "DESTINATION /etc" "DESTINATION $out/etc" \
         --replace "DESTINATION /lib" "DESTINATION $out/lib"
     done
+
     for file in \
       src/package_manager/misc/org.deepin.linglong.PackageManager.service \
       src/package_manager/misc/systemd/org.deepin.linglong.PackageManager.service \
@@ -71,10 +73,22 @@ stdenv.mkDerivation rec {
       substituteInPlace $file \
         --replace "/usr/bin" "$out/bin"
     done
+
+    for source in \
+      src/builder/builder/linglong_builder.cpp \
+      src/module/runtime/app.cpp
+    do
+      substituteInPlace $source \
+        --replace "/usr/bin/ll-box" "${linglong-box}/bin/ll-box"
+    done
   '';
 
   cmakeFlags = [
     "-DCMAKE_INSTALL_PREFIX=${placeholder "out"}"
+  ];
+
+  qtWrapperArgs = [
+    "--prefix PATH : ${lib.makeBinPath [ ostree procps util-linux ]}"
   ];
 
   meta = with lib; {

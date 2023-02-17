@@ -5,6 +5,8 @@
 , gtest
 , libseccomp
 , libyamlcpp
+, linglong-dbus-proxy
+, makeWrapper
 , pkgconfig
 }:
 
@@ -19,13 +21,18 @@ stdenv.mkDerivation rec {
     hash = "sha256-D/m9Ip4n+8pJIYppn6PtO+DYIrkZo+xwnGX50p+5uyc=";
   };
 
-  nativeBuildInputs = [ cmake pkgconfig ];
+  nativeBuildInputs = [ cmake makeWrapper pkgconfig ];
 
   buildInputs = [ gtest libseccomp libyamlcpp ];
 
   cmakeFlags = [
     "-DBUILD_STATIC=OFF"
   ];
+
+  postPatch = ''
+    substituteInPlace src/container/container.cpp \
+      --replace "/usr/bin/ll-dbus-proxy" "${linglong-dbus-proxy}/bin/ll-dbus-proxy"
+  '';
 
   meta = with lib; {
     description = "Linglong sandbox";

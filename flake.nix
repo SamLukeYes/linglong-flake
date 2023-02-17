@@ -30,7 +30,15 @@
           };
 
           services.dbus.packages = [ linglong ];
-          systemd.packages = [ linglong ];
+
+          systemd = {
+            packages = [ linglong ];
+            tmpfiles.rules = [
+              "C /var/lib/linglong 0775 deepin-linglong deepin-linglong - ${linglong-root}"
+              "Z /var/lib/linglong 0775 deepin-linglong deepin-linglong - -"
+              "d /var/log/linglong 0757 root root - -"
+            ];
+          };
 
           users = {
             groups.deepin-linglong = {};
