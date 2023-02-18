@@ -3,13 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs }: 
+  outputs = { self, nixpkgs, flake-utils }: 
   let
     system = "x86_64-linux";
   in {
-    packages.${system} = import ./. { pkgs = nixpkgs.legacyPackages.${system}; };
+    packages.${system} = flake-utils.lib.flattenTree (
+      import ./. { pkgs = nixpkgs.legacyPackages.${system}; }
+    );
     defaultPackage.${system} = self.packages.${system}.linglong;
     
     nixosModules = { config, lib, ... }:
