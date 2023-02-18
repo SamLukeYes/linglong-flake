@@ -11,13 +11,13 @@
 
 stdenv.mkDerivation rec {
   pname = "linglong-dbus-proxy";
-  version = "1.3.3.3.9";
+  version = "1.3.3.10-1";
 
   src = fetchFromGitHub {
     owner = "linuxdeepin";
     repo = pname;
-    rev = "v${version}";
-    hash = "sha256-095BL9DtZlAE4+IIRJPSqphjRjY5mWm3j5qhr2gBi2M=";
+    rev = "${version}";
+    hash = "sha256-buFizjxmlqd7Ewdnbx35OPfJi3IlSvgWxd/vYytQygE=";
   };
 
   nativeBuildInputs = [ cmake pkgconfig qttools wrapQtAppsHook ];
