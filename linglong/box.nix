@@ -12,13 +12,13 @@
 
 stdenv.mkDerivation rec {
   pname = "linglong-box";
-  version = "1.3.3.14";
+  version = "1.3.3.15-1";
 
   src = fetchFromGitHub {
     owner = "linuxdeepin";
     repo = pname;
-    rev = "v${version}";
-    hash = "sha256-D/m9Ip4n+8pJIYppn6PtO+DYIrkZo+xwnGX50p+5uyc=";
+    rev = "${version}";
+    hash = "sha256-Wwx7azcfZh2HBZMYXinHUDbzHAfywRx42asxDrQ/zu0=";
   };
 
   nativeBuildInputs = [ cmake makeWrapper pkgconfig ];
