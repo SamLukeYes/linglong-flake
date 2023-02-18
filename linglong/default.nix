@@ -25,13 +25,13 @@
 
 stdenv.mkDerivation rec {
   pname = "linglong";
-  version = "1.3.3.22";
+  version = "1.3.5-1";
 
   src = fetchFromGitHub {
     owner = "linuxdeepin";
     repo = pname;
-    rev = "v${version}";
-    hash = "sha256-lFtpI5dFSPH+yNLpwXEPpTqMCYo/LwkUG3iHWb1n7P4=";
+    rev = "${version}";
+    hash = "sha256-13mE8tArdfiriBTw7XkcySAawF3dPhc7KcXlnKg/M3s=";
   };
 
   nativeBuildInputs = [
@@ -54,6 +54,10 @@ stdenv.mkDerivation rec {
     ostree
     pcre
     qtwebsockets
+  ];
+
+  patches = [
+    ./ostree-pid.patch
   ];
 
   postPatch = ''
