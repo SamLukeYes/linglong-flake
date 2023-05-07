@@ -15,7 +15,7 @@
     );
     defaultPackage.${system} = self.packages.${system}.linglong;
     
-    nixosModules = { config, lib, ... }:
+    nixosModules.default = { config, lib, ... }:
       with lib;
       with self.packages.${system};
       let cfg = config.services.linglong; in
