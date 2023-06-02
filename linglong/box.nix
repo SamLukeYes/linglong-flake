@@ -37,5 +37,6 @@ stdenv.mkDerivation rec {
     description = "Linglong sandbox";
     homepage = "https://github.com/linuxdeepin/linglong-box";
     license = licenses.gpl3Plus;
+    platforms = [ "x86_64-linux" ];
   };
 }

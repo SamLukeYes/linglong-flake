@@ -28,5 +28,6 @@ stdenv.mkDerivation rec {
     description = "A dbus proxy for linglong applications which run in the linglong-box";
     homepage = "https://github.com/linuxdeepin/linglong-dbus-proxy";
     license = licenses.gpl3Plus;
+    platforms = [ "x86_64-linux" ];
   };
 }

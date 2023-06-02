@@ -25,13 +25,13 @@
 
 stdenv.mkDerivation rec {
   pname = "linglong";
-  version = "1.3.5-1";
+  version = "1.3.8";
 
   src = fetchFromGitHub {
     owner = "linuxdeepin";
     repo = pname;
     rev = "${version}";
-    hash = "sha256-13mE8tArdfiriBTw7XkcySAawF3dPhc7KcXlnKg/M3s=";
+    hash = "sha256-rPJCNOcbYF8BWEgkK1G3k4TEIpHOpmZnm0k2q8OTRaM=";
   };
 
   nativeBuildInputs = [
@@ -41,6 +41,7 @@ stdenv.mkDerivation rec {
     wrapGAppsHook
     wrapQtAppsHook
   ];
+  dontWrapGApps = true;
 
   buildInputs = [
     curl
@@ -97,9 +98,14 @@ stdenv.mkDerivation rec {
     "--set SHELL ${runtimeShell}"
   ];
 
+  preFixup = ''
+    qtWrapperArgs+=("''${gappsWrapperArgs[@]}")
+  '';
+
   meta = with lib; {
     description = "The container application toolkit of deepin";
     homepage = "https://linglong.dev";
     license = licenses.gpl3Plus;
+    platforms = [ "x86_64-linux" ];
   };
 }
