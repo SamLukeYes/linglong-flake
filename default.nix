@@ -1,12 +1,18 @@
 { pkgs ? import <nixpkgs> { } }:
 
-with pkgs;
 let 
-  packages = ps: with ps; {
-    linglong = callPackage ./linglong { };
-    linglong-box = callPackage ./linglong/box.nix { };
-    linglong-dbus-proxy = callPackage ./linglong/dbus.nix { };
-    linglong-root = callPackage ./linglong/root.nix { };
+  packages = ps: {
+    linglong = ps.callPackage ./linglong { };
+    linglong-box = ps.callPackage ./linglong/box.nix { };
+    linglong-dbus-proxy = ps.callPackage ./linglong/dbus.nix { };
+    linglong-root = ps.callPackage ./linglong/root.nix { };
+
+    # linglong currently expects ostree to be built without curl support
+    ostree = pkgs.ostree.overrideAttrs (old: {
+      configureFlags = pkgs.lib.subtractLists [
+        "--with-curl"
+      ] old.configureFlags;
+    });
   };
 in
-  lib.makeScope libsForQt5.newScope packages
+  pkgs.lib.makeScope pkgs.libsForQt5.newScope packages
