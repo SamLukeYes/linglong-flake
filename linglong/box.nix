@@ -2,6 +2,7 @@
 , stdenv
 , fetchFromGitHub
 , cmake
+, fuse-overlayfs
 , gtest
 , libseccomp
 , libyamlcpp
@@ -31,6 +32,8 @@ stdenv.mkDerivation rec {
   postPatch = ''
     substituteInPlace src/container/container.cpp \
       --replace "/usr/bin/ll-dbus-proxy" "${linglong-dbus-proxy}/bin/ll-dbus-proxy"
+    substituteInPlace src/container/mount/filesystem_driver.cpp \
+      --replace "/usr/bin/fuse-overlayfs" "${fuse-overlayfs}/bin/fuse-overlayfs"
   '';
 
   meta = with lib; {
