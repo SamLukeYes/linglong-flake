@@ -22,7 +22,9 @@
       {
         options = {
           services.linglong = {
-            enable = mkEnableOption "linglong";
+            enable = mkEnableOption "linglong" // {
+              default = true;
+            };
           };
         };
 
