@@ -19,7 +19,7 @@
 , qtwebsockets
 , runtimeShell
 , util-linux
-, wrapGAppsHook
+, wrapGAppsNoGuiHook
 , wrapQtAppsHook
 }:
 
@@ -38,7 +38,7 @@ stdenv.mkDerivation rec {
     cmake
     pkgconfig
     qttools
-    wrapGAppsHook
+    wrapGAppsNoGuiHook
     wrapQtAppsHook
   ];
   dontWrapGApps = true;
