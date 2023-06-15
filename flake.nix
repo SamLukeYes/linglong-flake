@@ -31,6 +31,7 @@
         config = mkIf cfg.enable {
           environment = {
             profiles = [ "${linglong}/etc/profile.d" ];
+            sessionVariables.LINGLONG_ROOT = "/var/lib/linglong";
             systemPackages = [ linglong ];
           };
 
