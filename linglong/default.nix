@@ -26,13 +26,13 @@
 
 stdenv.mkDerivation rec {
   pname = "linglong";
-  version = "1.3.8";
+  version = "1.3.9";
 
   src = fetchFromGitHub {
     owner = "linuxdeepin";
     repo = pname;
     rev = "${version}";
-    hash = "sha256-rPJCNOcbYF8BWEgkK1G3k4TEIpHOpmZnm0k2q8OTRaM=";
+    hash = "sha256-6M9xGlNuEinquWCg+ClMvFxlsQUFArqI9xS6gi3pIUI=";
   };
 
   nativeBuildInputs = [
