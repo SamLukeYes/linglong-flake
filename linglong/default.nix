@@ -14,7 +14,7 @@
 , linglong-dbus-proxy
 , ostree
 , pcre
-, pkgconfig
+, pkg-config
 , procps
 , qttools
 , qtwebsockets
@@ -26,18 +26,18 @@
 
 stdenv.mkDerivation rec {
   pname = "linglong";
-  version = "1.3.9";
+  version = "1.3.14";
 
   src = fetchFromGitHub {
     owner = "linuxdeepin";
     repo = pname;
     rev = "${version}";
-    hash = "sha256-6M9xGlNuEinquWCg+ClMvFxlsQUFArqI9xS6gi3pIUI=";
+    hash = "sha256-lsIGTYwZNux57maAnpkRIJueJeYH1+0CLDaDeIV0Fa4=";
   };
 
   nativeBuildInputs = [
     cmake
-    pkgconfig
+    pkg-config
     qttools
     wrapGAppsNoGuiHook
     wrapQtAppsHook

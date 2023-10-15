@@ -7,7 +7,7 @@
 , libseccomp
 , libyamlcpp
 , linglong-dbus-proxy
-, pkgconfig
+, pkg-config
 }:
 
 stdenv.mkDerivation rec {
@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
     hash = "sha256-Wwx7azcfZh2HBZMYXinHUDbzHAfywRx42asxDrQ/zu0=";
   };
 
-  nativeBuildInputs = [ cmake pkgconfig ];
+  nativeBuildInputs = [ cmake pkg-config ];
 
   buildInputs = [ gtest libseccomp libyamlcpp ];
 
