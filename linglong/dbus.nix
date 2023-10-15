@@ -4,7 +4,7 @@
 , cmake
 , dbus
 , gtest
-, pkgconfig
+, pkg-config
 , qttools
 , wrapQtAppsHook
 }:
@@ -20,9 +20,14 @@ stdenv.mkDerivation rec {
     hash = "sha256-buFizjxmlqd7Ewdnbx35OPfJi3IlSvgWxd/vYytQygE=";
   };
 
-  nativeBuildInputs = [ cmake pkgconfig qttools wrapQtAppsHook ];
+  nativeBuildInputs = [ cmake pkg-config qttools wrapQtAppsHook ];
 
   buildInputs = [ dbus gtest ];
+
+  postPatch = ''
+    substituteInPlace src/proxy/dbus_proxy.cpp \
+      --replace "/usr/share" "$out/share"
+  '';
 
   meta = with lib; {
     description = "A dbus proxy for linglong applications which run in the linglong-box";
